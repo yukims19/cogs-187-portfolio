@@ -1,0 +1,364 @@
+<html>
+    <head>
+        <title>Yuki</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="Moleskine Notebook with jQuery Booklet" />
+        <meta name="keywords" content="jquery, book, flip, pages, moleskine, booklet, plugin, css3 "/>
+		    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+
+		    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+		    <script src="booklet/jquery.easing.1.3.js" type="text/javascript"></script>
+		    <script src="booklet/jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
+
+		    <link href="booklet/jquery.booklet.1.1.0.css" type="text/css" rel="stylesheet" media="screen" />
+		    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+
+		    <script src="cufon/cufon-yui.js" type="text/javascript"></script>
+		    <script src="cufon/ChunkFive_400.font.js" type="text/javascript"></script>
+		    <script src="cufon/Note_this_400.font.js" type="text/javascript"></script>
+		    <script type="text/javascript">
+
+			   Cufon.replace('.book_wrapper a', {hover:true});
+			   Cufon.replace('.title', {textShadow: '1px 1px #C59471', fontFamily:'ChunkFive'});
+			   Cufon.replace('.reference a', {textShadow: '1px 1px #C59471', fontFamily:'ChunkFive'});
+			   Cufon.replace('.loading', {textShadow: '1px 1px #000', fontFamily:'ChunkFive'});
+        </script>
+    </head>
+
+    <script type="text/javascript">
+     var canvas, ctx, flag = false,
+         prevX = 0,
+         currX = 0,
+         prevY = 0,
+         currY = 0,
+         dot_flag = false;
+
+     var x = "black",
+         y = 2;
+
+     function init() {
+         canvas = document.getElementById('can');
+         ctx = canvas.getContext("2d");
+         w = canvas.width;
+         h = canvas.height;
+
+         canvas.addEventListener("mousemove", function (e) {
+             findxy('move', e)
+         }, false);
+         canvas.addEventListener("mousedown", function (e) {
+             findxy('down', e)
+         }, false);
+         canvas.addEventListener("mouseup", function (e) {
+             findxy('up', e)
+         }, false);
+         canvas.addEventListener("mouseout", function (e) {
+             findxy('out', e)
+         }, false);
+     }
+
+     function color(obj) {
+         switch (obj.id) {
+             case "green":
+                 x = "green";
+                 break;
+             case "blue":
+                 x = "blue";
+                 break;
+             case "red":
+                 x = "red";
+                 break;
+             case "yellow":
+                 x = "yellow";
+                 break;
+             case "orange":
+                 x = "orange";
+                 break;
+             case "black":
+                 x = "black";
+                 break;
+             case "white":
+                 x = "white";
+                 break;
+         }
+         if (x == "white") y = 14;
+         else y = 2;
+
+     }
+
+     function draw() {
+         ctx.beginPath();
+         ctx.moveTo(prevX, prevY);
+         ctx.lineTo(currX, currY);
+         ctx.strokeStyle = x;
+         ctx.lineWidth = y;
+         ctx.stroke();
+         ctx.closePath();
+     }
+
+     function erase() {
+         var m = confirm("Want to clear");
+         if (m) {
+             ctx.clearRect(0, 0, w, h);
+             document.getElementById("canvasimg").style.display = "none";
+         }
+     }
+
+     function save() {
+         document.getElementById("canvasimg").style.border = "2px solid";
+         var dataURL = canvas.toDataURL();
+         document.getElementById("canvasimg").src = dataURL;
+         document.getElementById("canvasimg").style.display = "inline";
+     }
+
+     function findxy(res, e) {
+         if (res == 'down') {
+             prevX = currX;
+             prevY = currY;
+             currX = e.clientX - canvas.offsetLeft;
+             currY = e.clientY - canvas.offsetTop;
+
+             flag = true;
+             dot_flag = true;
+             if (dot_flag) {
+                 ctx.beginPath();
+                 ctx.fillStyle = x;
+                 ctx.fillRect(currX, currY, 2, 2);
+                 ctx.closePath();
+                 dot_flag = false;
+             }
+         }
+         if (res == 'up' || res == "out") {
+             flag = false;
+         }
+         if (res == 'move') {
+             if (flag) {
+                 prevX = currX;
+                 prevY = currY;
+                 currX = e.clientX - canvas.offsetLeft;
+                 currY = e.clientY - canvas.offsetTop;
+                 draw();
+             }
+         }
+     }
+    </script>
+    <body onload="init()">
+        <canvas id="can"  width="1240px" height="600px" style="position:absolute;left:10%;background-color:#cac8c8;"></canvas>
+        <div style="position:absolute;top:2%;left:13%;">Choose Color</div>
+        <div style="position:absolute;top:5%;left:15%;width:10px;height:10px;background:green;" id="green" onclick="color(this)"></div>
+        <div style="position:absolute;top:5%;left:16%;width:10px;height:10px;background:blue;" id="blue" onclick="color(this)"></div>
+        <div style="position:absolute;top:5%;left:17%;width:10px;height:10px;background:red;" id="red" onclick="color(this)"></div>
+        <div style="position:absolute;top:7%;left:15%;width:10px;height:10px;background:yellow;" id="yellow" onclick="color(this)"></div>
+        <div style="position:absolute;top:17%;left:46%;width:10px;height:10px;background:orange;" id="orange" onclick="color(this)"></div>
+        <div style="position:absolute;top:17%;left:47%;width:10px;height:10px;background:black;" id="black" onclick="color(this)"></div>
+        <div style="position:absolute;top:20%;left:43%;">Eraser</div>
+        <div style="position:absolute;top:22%;left:45%;width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
+        <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+        <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:15%;left:15%;">
+        <div class="header">
+            <div class="language">
+                <a href="#">English</a>
+                <a href="#">日本語(Japanese)</a>
+                <a href="#">中文(Chinese)</a>
+            </div>
+            <div class="menu">
+                <a class="home" href="#">Home</a>
+                <a class="about" href="#">About</a>
+                <a class="projects" href="#">Projects</a>
+                <a class="contact" href="#">Contact</a>
+            </div>
+        </div>
+
+		        <div class="book_wrapper">
+			          <a id="next_page_button"></a>
+			          <a id="prev_page_button"></a>
+			          <div id="loading" class="loading">Loading pages...</div>
+			          <div id="mybook" style="display:none;">
+                    <img class="r_sticker" src="images/red_sticker1.png" />
+                    <img class="b_sticker" src="images/blue_sticker1.png" />
+				            <div class="b-load">
+					              <div class="great">
+						                <h1>Hello</h1>
+                            <p>My name is Youxi Li (Yuki).</p>
+                            <img src="images/love_code1.jpeg"/>
+						            </div>
+                        <div class="iam">
+						                <h1>I am ...</h1>
+                            <p>an open-minded <span style="color: #2f6919; font-size:35px"> Learner</span>,<br/> a <span style="color: #2f6919; font-size:35px">Web Developer</span>, <br/>and a <span style="color: #2f6919; font-size:35px">Front-End Engineer</span>.</p>
+                            <img src="images/love_code2.jpeg"/>
+                        </div>
+					              <div class="ilove">
+						                <h1>I love ...</h1>
+                            <p> <span style="color: #2f6919; font-size:34px">Human-Centered Design</span>,<br/><span style="color: #2f6919; font-size:34px">Programming</span>, and <br/><span style="font-size:25px">exploring </span><span style="color: #2f6919; font-size:33.5px">Human Cognition</span>.</p>
+                            <img src="images/ilove_back1.png"/>
+					              </div>
+
+					              <div class="ilove2">
+                            <img class="r_sticker0" src="images/red_sticker0.png" />
+                            <p>I do <span style="font-style: oblique">human-centered design</span> by utilizing my understanding in <span style="font-style: oblique">human cognition</span> to do merge technology with everyday life more smoothly. I love <span style="font-style: oblique">programming</span> for it can not only efficiently present and distribute the design, but also it potential effect for the society in the future.</p>
+                            <img class="ilove22" src="images/ilove_back2.png"/>
+                        </div>
+
+                        <div class="goal">
+						                <h1>Goal of 2017</h1>
+						                <p>- Host personal website<br/>- play tennis everyweek</p>
+					              </div>
+                        <div>
+                            <img class="b_sticker0" src="images/blue_sticker0.png" />
+                        </div>
+				            </div>
+			          </div>
+		        </div>
+        </div>
+
+        <!-- Display of all projects-->
+        <div class="screen2">
+            <div class="project_display">
+                <h1> Projects </h1>
+                <div class="unit">
+                    <div class="rap">
+                        <li> ID Verification </li>
+                        <img id ="id_verification" src="./images/id_verification2.svg"/>
+                    </div>
+                </div>
+
+                <div class="unit">
+                    <div class="rap">
+                        <li>Photo Gallery</li>
+                        <img id="photo_gallery" src="./images/photo_gallery3.svg"/>
+                        <p>Photo Gallery<br/>Web App</p>
+                    </div>
+                </div>
+
+                <div class="unit">
+                    <div class="rap">
+                        <li>Web Chat</li>
+                        <img id="web_chat" src="./images/lvchat2.svg"/>
+                    </div>
+                </div>
+
+                <div class="unit">
+                    <div class="rap">
+                        <li>BigBelly Analysis</li>
+                        <img id="bigbelly" src="./images/bigbelly2.svg"/>
+                    </div>
+                </div>
+
+                <div class="unit">
+                    <div class="rap">
+                        <li>Car-eating Game</li>
+                        <img id="car_eating" src="./images/careating.svg"/>
+                    </div>
+                </div>
+
+                <div class="unit">
+                    <div class="rap">
+                        <li>Keylock</li>
+                        <img id="keylock" src="./images/keylock2.svg"/>
+                    </div>
+                </div>
+
+                <div class="unit">
+                    <div class="rap">
+                        <li>Lamp</li>
+                        <img id="lamp" src="./images/lamp.jpeg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen3">
+            <h1>Contact me</h1>
+
+        </div>
+
+
+
+        <!-- The JavaScript -->
+
+        <script type="text/javascript">
+			   $(function() {
+				     var $mybook 		= $('#mybook');
+				     var $bttn_next		= $('#next_page_button');
+				     var $bttn_prev		= $('#prev_page_button');
+				     var $loading		= $('#loading');
+				     var $mybook_images	= $mybook.find('img');
+				     var cnt_images		= $mybook_images.length;
+				     var loaded			= 0;
+				     //preload all the images in the book,
+				         //and then call the booklet plugin
+             $(".projects").click(function() {
+                 $('html,body').animate({
+                     scrollTop: $(".screen2").offset().top},
+                                        'slow');
+             });
+             $(".contact").click(function() {
+                 $('html,body').animate({
+                     scrollTop: $(".screen3").offset().top},
+                                        'slow');
+             });
+
+				     $mybook_images.each(function(){
+					       var $img 	= $(this);
+					       var source	= $img.attr('src');
+					       $('<img/>').load(function(){
+						++loaded;
+						         if(loaded == cnt_images){
+							           $loading.hide();
+							           $bttn_next.show();
+							           $bttn_prev.show();
+							           $mybook.show().booklet({
+								             name:               null,                            // name of the booklet to display in the document title bar
+								             width:              800,                             // container width
+								             height:             500,                             // container height
+								             speed:              600,                             // speed of the transition between pages
+								             direction:          'LTR',                           // direction of the overall content organization, default LTR, left to right, can be RTL for languages which read right to left
+								             startingPage:       0,                               // index of the first page to be displayed
+								             easing:             'easeInOutQuad',                 // easing method for complete transition
+								             easeIn:             'easeInQuad',                    // easing method for first half of transition
+								             easeOut:            'easeOutQuad',                   // easing method for second half of transition
+
+								             closed:             false,                           // start with the book "closed", will add empty pages to beginning and end of book
+								             closedFrontTitle:   null,                            // used with "closed", "menu" and "pageSelector", determines title of blank starting page
+								             closedFrontChapter: null,                            // used with "closed", "menu" and "chapterSelector", determines chapter name of blank starting page
+								             closedBackTitle:    null,                            // used with "closed", "menu" and "pageSelector", determines chapter name of blank ending page
+								             closedBackChapter:  null,                            // used with "closed", "menu" and "chapterSelector", determines chapter name of blank ending page
+								             covers:             false,                           // used with  "closed", makes first and last pages into covers, without page numbers (if enabled)
+
+								             pagePadding:        10,                              // padding for each page wrapper
+								             pageNumbers:        true,                            // display page numbers on each page
+
+								             hovers:             false,                            // enables preview pageturn hover animation, shows a small preview of previous or next page on hover
+								             overlays:           false,                            // enables navigation using a page sized overlay, when enabled links inside the content will not be clickable
+								             tabs:               false,                           // adds tabs along the top of the pages
+								             tabWidth:           60,                              // set the width of the tabs
+								             tabHeight:          20,                              // set the height of the tabs
+								             arrows:             false,                           // adds arrows overlayed over the book edges
+								             cursor:             'pointer',                       // cursor css setting for side bar areas
+
+								             hash:               false,                           // enables navigation using a hash string, ex: #/page/1 for page 1, will affect all booklets with 'hash' enabled
+								             keyboard:           true,                            // enables navigation with arrow keys (left: previous, right: next)
+								             next:               $bttn_next,          			// selector for element to use as click trigger for next page
+								             prev:               $bttn_prev,          			// selector for element to use as click trigger for previous page
+
+								             menu:               null,                            // selector for element to use as the menu area, required for 'pageSelector'
+								             pageSelector:       false,                           // enables navigation with a dropdown menu of pages, requires 'menu'
+								             chapterSelector:    false,                           // enables navigation with a dropdown menu of chapters, determined by the "rel" attribute, requires 'menu'
+
+								             shadows:            true,                            // display shadows on page animations
+								             shadowTopFwdWidth:  166,                             // shadow width for top forward anim
+								             shadowTopBackWidth: 166,                             // shadow width for top back anim
+								             shadowBtmWidth:     50,                              // shadow width for bottom shadow
+
+								             before:             function(){},                    // callback invoked before each page turn animation
+								             after:              function(){}                     // callback invoked after each page turn animation
+							           });
+							           Cufon.refresh();
+						         }
+					       }).attr('src',source);
+				     });
+
+			   });
+        </script>
+
+    </body>
+</html>
