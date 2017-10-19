@@ -212,55 +212,54 @@
 
         <!-- Display of all projects-->
         <div class="screen2">
+            <div class="lightbox">
+                <div class="lb_photo_gallery">
+                    <h1>Hererere</h1>
+                    <img src="photo_gallery.png"/>
+                </div>
+            </div>
             <div class="project_display">
                 <h1> Projects </h1>
                 <div class="unit">
                     <div class="rap">
-                        <li> ID Verification </li>
+                        <li> ID Verification<br/><span style="font-style:oblique;font-size:20px">Web App</span> </li>
                         <img id ="id_verification" src="./images/id_verification2.svg"/>
                     </div>
                 </div>
 
                 <div class="unit">
                     <div class="rap">
-                        <li>Photo Gallery</li>
+                        <li>Photo Gallery <br/><span style="font-style:oblique;font-size:20px">Web App</span></li>
+                        <a href="photo_gallery.html">
                         <img id="photo_gallery" src="./images/photo_gallery3.svg"/>
-                        <p>Photo Gallery<br/>Web App</p>
                     </div>
                 </div>
 
                 <div class="unit">
                     <div class="rap">
-                        <li>Web Chat</li>
+                        <li>Web Chat  <br/><span style="font-style:oblique;font-size:20px">Web App</span></li>
                         <img id="web_chat" src="./images/lvchat2.svg"/>
                     </div>
                 </div>
 
                 <div class="unit">
                     <div class="rap">
-                        <li>BigBelly Analysis</li>
+                        <li>BigBelly Analysis  <br/><span style="font-style:oblique;font-size:20px">Design Analysis</span></li>
                         <img id="bigbelly" src="./images/bigbelly2.svg"/>
                     </div>
                 </div>
 
                 <div class="unit">
                     <div class="rap">
-                        <li>Car-eating Game</li>
+                        <li>Car-eating Game  <br/><span style="font-style:oblique;font-size:20px">Web App</span></li>
                         <img id="car_eating" src="./images/careating.svg"/>
                     </div>
                 </div>
 
                 <div class="unit">
                     <div class="rap">
-                        <li>Keylock</li>
+                        <li>Keylock  <br/><span style="font-style:oblique;font-size:20px">rasberrypi</span></li>
                         <img id="keylock" src="./images/keylock2.svg"/>
-                    </div>
-                </div>
-
-                <div class="unit">
-                    <div class="rap">
-                        <li>Lamp</li>
-                        <img id="lamp" src="./images/lamp.jpeg"/>
                     </div>
                 </div>
             </div>
@@ -268,6 +267,16 @@
 
         <div class="screen3">
             <h1>Contact me</h1>
+            <img src="images/flower.png"/>
+            <h3>Name</h3>
+            <div class="name"></div>
+            <h3>Email</h3>
+            <div class="email"></div>
+            <h3>Message</h3>
+            <div class="message">
+
+            </div>
+            <h2>Send</h2>
 
         </div>
 
@@ -286,6 +295,11 @@
 				     var loaded			= 0;
 				     //preload all the images in the book,
 				         //and then call the booklet plugin
+             $(".home").click(function() {
+                 $('html,body').animate({
+                     scrollTop: $(".language").offset().top},
+                                        'slow');
+             });
              $(".projects").click(function() {
                  $('html,body').animate({
                      scrollTop: $(".screen2").offset().top},
@@ -295,6 +309,10 @@
                  $('html,body').animate({
                      scrollTop: $(".screen3").offset().top},
                                         'slow');
+             });
+             $(".unit img").click(function(){
+                 $(".lightbox").css("display","block");
+
              });
 
 				     $mybook_images.each(function(){

@@ -184,7 +184,7 @@ span.reference a:hover{
 	position:relative;
 	background:transparent url(../images/bg.png) no-repeat 9px 47px;
   font-family: Bodoni MT;
-  left:5%;
+//  left:5%;
   //  display:none;
 }
 
@@ -242,10 +242,35 @@ span.reference a:hover{
     margin-left:10px;
     margin-top: 55px;
     margin-bottom:30px;
-    font-size:25px;
     line-height:1.3;
     position:absolute;
     z-index:1;
+}
+.plus{
+    text-align:center;
+    width:250px;
+    left:67px;
+    font-size:30px;
+    margin: 0px;
+}
+.equal{
+    height: 49px;
+    top: 121px;
+    position: absolute;
+    width: 20px;
+    left: 196px;
+    border-left: solid;
+    border-right: solid;
+}
+.sum{
+    bottom: 30px;
+    text-align: center;
+    width: 250px;
+    left: 75px;
+    margin:0px;
+    font-size:33px;
+    text-decoration: underline;
+    text-decoration-style: wavy;
 }
 .book_wrapper .right{
 
@@ -334,14 +359,15 @@ a#prev_page_button:hover{
 .screen2, .screen3{
     width:100%;
     min-width:1000px;
-    height:670px;
+//    height:670px;
     overflow:hidden;
-//    background-color:gray;
+    //    background-color:gray;
+    font-family: Bodoni MT;
 }
 .project_display{
     position:relative;
     width:80%;
-    left:10%;
+    left:15%;
     height:100%;
 }
 .project_display h1, .screen3 h1{
@@ -366,6 +392,7 @@ a#prev_page_button:hover{
 .project_display .unit .rap img{
     width:100%;
     height:100%;
+    filter:grayscale(100%);
     transition: all .2s ease-in-out;
  /*   position:relative;
     left:50px;
@@ -374,12 +401,12 @@ a#prev_page_button:hover{
     transition: all 0.2s ease-in-out;*/
 }
 .project_display .unit .rap img:hover{
-    filter:grayscale(80%);
+    filter:grayscale(0%);
     cursor: pointer;
     transform: scale(1.5);
 }
 .project_display .unit .rap p{
-    margin-top: -100%;
+  /*  margin-top: -100%;
     position: absolute;
     text-align: center;
     width: 100%;
@@ -387,7 +414,57 @@ a#prev_page_button:hover{
     font-size: 25px;
     color: black;
     line-height: 1.5;
-    border-radius: 75px;
+    border-radius: 75px;*/
+    position: absolute;
+    text-align: center;
+    width: 60%;
+    left: 20%;
+    z-index: 2;
+    font-size: 30px;
+//    display:none;
+}
+.lightbox{
+    height:100%;
+    width:100%;
+    background-color:rgba(0,0,0,0.7);
+    display:none;
+    z-index:1;
+    position:absolute;
+}
+.screen3 img{
+    width:30%;
+    position:absolute;
+    left:65%;
+}
+.screen3 h3{
+    text-align: left;
+    width: 40%;
+    left: 20%;
+    font-size: 22px;
+    position: relative;
+    margin-top: 30px;
+}
+.screen3 .name, .email, .message{
+    width: 40%;
+    left: 20%;
+    border: solid;
+    position: relative;
+    height: 40px;
+}
+.message{
+    height:150px;
+}
+.screen3 h2{
+    text-align:center;
+    width:10%;
+    left:20%;
+    font-size:25px;
+    position:relative;
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left:15%;
+    border:solid;
+
 }
 /*
 .project_display .unit{
