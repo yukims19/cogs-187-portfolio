@@ -1,0 +1,193 @@
+*{
+    font-family: Bodoni MT;
+}
+body{
+    margin:0px;
+    background-color:#f2f2f2;
+}
+
+.menu{
+    width:10%;
+    font-size:20px;
+    background-color:white;
+    height:100vh;
+    text-align:center;
+    position:fixed;
+}
+.menu a{
+    font-family: Arial, Helvetica, sans-serif;
+    color:black;
+    text-decoration:none;
+    padding: 3%;
+    margin-top:5vh;
+    margin-bottom:5vh;
+    margin-left:10%;
+    float:left;
+    transition: all .2s ease-in-out;
+}
+.menu a:hover{
+    text-decoration:underline;
+}
+.main{
+    width:100%;
+    height:100%;
+//    left:10%;
+    position:relative;
+}
+h1{
+    width:50%;
+    left:25%;
+    position:relative;
+    text-align:center;
+    font-size: 50px;
+    padding-top: 25px;
+}
+#overview{
+    width: 50%;
+    left: 25%;
+    position: relative;
+    text-align: center;
+}
+
+.line{
+   width: 80%;
+   left: 10%;
+   height: 1px;
+   position: absolute;
+   margin-top: -45px;
+   z-index: 0;
+}
+.title{
+    margin-top:50px;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 25px;
+    font-family: Bodoni MT;;
+    position:relative;
+    background-color:#f2f2f2;
+    width:15%;
+    left: 42.5%;
+    z-index:1;
+}
+/*functions*/
+.second, .third, .forth{
+    overflow:hidden;
+}
+#functions{
+    width:80%;
+    left:10%;
+    position:relative;
+    overflow:hidden;
+}
+#functions img{
+    width:44%;
+    margin:7px 3% 7px 3%;
+    float:left;
+}
+
+
+/*process*/
+#process{
+    width:100%;
+    overflow:hidden;
+}
+#tutorial img, #design img{
+    width:100%;
+}
+#tutorial, #design, #coding{
+    width:25%;
+    float:left;
+}
+#tutorial{
+    margin-right: 5%;
+    margin-left: 7.5%;
+}
+#design{
+    margin-right:5%;
+}
+#tutorial p, #design p, #design a{
+    width:100%;
+    font-size:20px;
+    font-style:oblique;
+    text-align:center;
+}
+#design a{
+    left: 50%;
+    position: relative;
+    margin-left: -67px;
+    color:black;
+}
+#coding #emacs{
+    width:100%;
+    overflow:hidden;
+    float:left;
+}
+#logo{
+    width:10%;
+    float:left;
+}
+#coding p{
+    width:90%;
+    font-size:20px;
+    font-style:oblique;
+    text-align:center;
+    float:left;
+}
+#coding_img{
+    width:100%;
+}
+
+#sum_arrow{
+    width:80%;
+    position:relative;
+    left:10%;
+    margin-top:20px;
+    height:20px;
+}
+#arrow1{
+    position: absolute;
+    width: 10%;
+    left: 32%;
+    margin-top: 15px;
+}
+#arrow2{
+    position: absolute;
+    width: 10%;
+    left: 62%;
+    margin-top: 15px;
+}
+
+h2{
+    text-align:center;
+}
+#tutorial .descriptions, #design .descriptions,
+#coding .descriptions{
+    text-align:left;
+    font-style:normal;
+}
+
+/*
+#description{
+    font-size:20px;
+    width:70%;
+    left:15%;
+    position:relative;
+    text-align:center;
+}
+.photo_des{
+    width:40%;
+    height:100%;
+    left:10%;
+    position:absolute;
+    border:solid;
+}*/
+.copy_right{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: #EEEEEE;
+    color: #878787;
+    text-align: center;
+    font-size: 0.9em;
+    bottom:0px;
+}
